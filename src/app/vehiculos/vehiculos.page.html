@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Registrar Vehiculo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <h1>Registra tu auto y empieza hacer viajes con TeLlevoApp</h1>
+  </ion-item>
+  <img style="margin: auto; display: flex;" src="assets/img/celu.png">
+<div class="contenido">
+
+ 
+
+  <form [formGroup]="vehiculo" (ngSubmit)="guardar()">
+<ion-item>
+  <ion-label position="floating">Patente vehiculo</ion-label>
+  <ion-input formControlName="patente"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">Nombre Chofer</ion-label>
+  <ion-input formControlName="nombre"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">Modelo</ion-label>
+  <ion-input formControlName="modelo"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">Cantidad de pasajeros</ion-label>
+  <ion-input formControlName="cantidad"></ion-input>
+</ion-item>
+<ion-button color="primary" style="margin: auto; display: flex;" type="submit ">Guardar</ion-button>
+<ion-button color="warning" style="margin: auto; display: flex; margin-top: 40px;" RouterLink='/seleccion'>Volver</ion-button>
+
+</form>
+
+</div>
+
+</ion-content>
+

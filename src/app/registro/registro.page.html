@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="margin-left: 20px;">Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Crea una cuenta en TeLlevoAPP</ion-card-title>
+    </ion-card-header>
+    <ion-card-content style="display: flex; background-color: whitesmoke;">
+     
+      <form [formGroup]="formularioRegistro" (keyup.enter)="guardar()">
+        <ion-item style="margin-top: 15px;">
+          <ion-label position="floating">Correo</ion-label>
+          <ion-input formControlName="correo"></ion-input>
+        </ion-item>
+        <ion-item style="margin-top: 15px;">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input formControlName="nombre"></ion-input>
+        </ion-item>
+        <ion-item style="margin-top: 15px;"> 
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <ion-item style="margin-top: 15px;">
+          <ion-label position="floating">Confirmar Contraseña</ion-label>
+          <ion-input formControlName="confirmacionPassword" type="password"></ion-input>
+        </ion-item>
+        <br>
+
+      </form>
+      <img src="assets/img/duox.png" style="height: 15%; width: 30%; margin-left: auto;">
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+<ion-footer>
+        <ion-button style="height: 50px; font-size: 30px;" (click)="guardar()">
+          Registrarse
+        </ion-button><br>
+        <ion-button fill="clear" style="height: 50px; font-size: 30px;" class="iniciar" routerLink="/login">volver</ion-button>
+</ion-footer>

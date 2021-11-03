@@ -1,0 +1,35 @@
+<ion-content>
+
+  <ion-card class="rel" style="background-image: url('../assets/img/city.jpg');">
+    <ion-card class="imagen">
+      <img src="assets/img/autito.svg">
+    </ion-card>
+  </ion-card>
+
+  <ion-card class="contenido" >
+    <ion-card-header>
+      <ion-card-title>Iniciar Sesión</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="formularioLogin">
+        <ion-item>
+          <ion-label position="floating">Correo</ion-label>
+          <ion-input formControlName="correo"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+      </form>
+      <br>
+      <ion-button color="success" (click)="ingresar()">
+        Iniciar Sesión
+      </ion-button><br>
+      <ion-button color="dark" [routerLink]="['/registro']">Registrarse</ion-button>
+      <ion-button style="width: 100%; color: black; margin-top: 15px;"  fill="clear" class="iniciar2" routerLink="/restablecer">Te olvidaste de la contraseña?</ion-button>
+  
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

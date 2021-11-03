@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="margin-left: 20px;">Cambio de Contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="border: 1px outset rgba(19, 132, 160, 0.72);">
+  <div class="container">
+    <div class="caja">
+      <div class="item">
+       
+        <br>
+        
+        <h5>Si la contraseña se le olvido puede restablecera con un el link que se le enviara al correo Institucional</h5>
+        <br>
+        <br>
+        <ion-label>Correo Institucional:</ion-label>
+        <input type="text">
+        <ion-button color="success" (click)="enviar()">Enviar</ion-button><br>
+        <ion-button fill="clear" class="iniciar" routerLink="/login">volver</ion-button>
+      </div>
+
+    </div>
+  </div>
+
+</ion-content>

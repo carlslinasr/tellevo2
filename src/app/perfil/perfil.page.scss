@@ -1,0 +1,33 @@
+.container{
+    width: 250px;
+    height: 250px;
+}
+.caja{
+    width: 100vw;
+    height: 716px;
+    
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.item{
+    width: 275px;
+    height: 450px;
+    margin: 5%;
+    box-shadow: 1px 1px 5px -1px;
+    padding: 10px;
+    border-radius: 2%;
+    
+}
+.item2{
+    width: 275px;
+    height: 100px;
+    margin: 5%;
+    
+    padding: 10px;
+    border-radius: 2%;
+    text-align: center;
+    
+}

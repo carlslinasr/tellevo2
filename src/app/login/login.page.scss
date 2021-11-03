@@ -1,0 +1,48 @@
+.rel {
+
+    height: 50%;
+    ;
+}
+
+.imagen {
+    
+    display: block;
+    justify-content: center;
+width: 200px;
+    text-align: center;
+    margin: auto;
+    --ion-background-color: transparent !important;
+    margin-top: 60px;
+}
+
+
+ion-card-title {
+
+    text-align: center;
+    font-size: 30px;
+}
+
+ion-button {
+    justify-content: center;
+    text-align: center;
+    display: block;
+    margin: auto;
+    width: 50%;
+}
+
+
+
+.contenido {
+    background-color: white;
+     margin-top: -60px;
+      width: 90%;
+       display: block;
+       margin-right: auto; 
+       margin-left: auto;
+       border-radius: 20px;
+}
+
+ion-item {
+    text-align: center;
+    color: gray;
+}

@@ -1,0 +1,31 @@
+<ion-header  style="background-image: url('../assets/img/city.jpg'); opacity: 0.9;">
+  <br>
+  ¿Como quieres ingresar?
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-radio-group>
+      <br>
+      <br>
+      <ion-item>
+        <ion-icon name="people-outline" style="font-size: 30px; margin-right: 15px;"></ion-icon>
+        <ion-label>Pasajero</ion-label>
+        <ion-radio routerLink="/tabs/mapa" value="Pasajero"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="car-sport-outline" style="font-size: 30px; margin-right: 15px;" ></ion-icon>
+        <ion-label>Conductor</ion-label>
+        <ion-radio routerLink="/ingreso-chofer" value="vehiculo"></ion-radio>
+      </ion-item>
+      
+    </ion-radio-group>
+  </ion-list>
+  <br>
+  <!--<ion-button routerLink="/tabs/mapa" expand="block" class="iniciar">Guardar</ion-button>-->
+</ion-content>
+
+<ion-footer>
+  <ion-button fill="clear" class="iniciar" routerLink="/login">volver</ion-button>
+</ion-footer>
