@@ -6,6 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 /**
  Agregamos los modulos de servicio de autenticacion y authGuard, ademas del sotrage
@@ -24,6 +25,7 @@ import { Storage } from '@ionic/storage';
  */
 
   providers: [
+    Geolocation,
     AuthenGuardService,
     AuthenticationService,
     Storage,
