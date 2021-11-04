@@ -4,6 +4,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <ion-input type="text" placeholder="ingrese direccion" [(ngModel)]="dire"></ion-input>
+  <ion-button (click)="Direccion()">Buscar</ion-button>
+  
 <div id="map"></div>
+<div id="lista">
+  <ion-list *ngFor="let d of wayListaDeDirecciones">
+    <ion-label (click)="Eliminar(d)">{{d.ubicacion}}</ion-label>
+  </ion-list>
+</div>
 </ion-content>
