@@ -24,7 +24,7 @@ export class DireccionesPage implements OnInit {
   constructor(
     private geoLoca : Geolocation,
     private loadingCtrl: LoadingController
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.cargarMapa();
@@ -35,11 +35,12 @@ export class DireccionesPage implements OnInit {
     });
     await cargar.present();
     // recuperar nuestra ubicacion actual
-    this.ubicacionActual = await this.geoLoca.getCurrentPosition(); 
+    const ubicacionActual = await this.geoLoca.getCurrentPosition(); 
+    // crea un marcador para la posicion actual
     const mapaHtml: HTMLElement = document.getElementById("mapa")
-    const ubicacion={
-      lat: this.ubicacionActual.coords.latitude,
-      lng: this.ubicacionActual.coords.longitude
+    const ubicacion = {
+      lat: ubicacionActual.coords.latitude,
+      lng: ubicacionActual.coords.longitude
     };
 
     this.map = new google.maps.Map(mapaHtml, {
@@ -48,7 +49,7 @@ export class DireccionesPage implements OnInit {
     });
 
 
-    this.direccionDibujar.setMap(this.map);
+    //this.direccionDibujar.setMap(this.map);
 
     google.maps.event.addListenerOnce(this.map,'idle',()=>{
       cargar.dismiss();
