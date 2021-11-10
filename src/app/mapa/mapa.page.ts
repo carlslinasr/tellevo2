@@ -33,14 +33,11 @@ export class MapaPage implements OnInit {
 
   // variable que recupera la direccion escrita por el usuario
   dire:string;
-  // variable para almacenar la direccion que entrega Google
+  // variable que recupera la direccion de google
   direccion_google:string;
-  // variable para almacenar latitud y longitud
+  // recuperar latitud y longitud
   latitud:number;
   longitud:number;
-  // variable numeradora de puntos de parada
-  puntos:number=0;
-
 
   constructor(
     private geoloc : Geolocation,
@@ -59,8 +56,8 @@ export class MapaPage implements OnInit {
       (data)=>{
           console.log(data);
           console.log(data.results[0].formatted_address);
-          this.direccion_google=data.results[0].formatted_address;
           console.log(data.results[0].geometry.location);
+          this.direccion_google=data.results[0].formatted_address;
           this.latitud=data.results[0].geometry.location.lat;
           this.longitud=data.results[0].geometry.location.lng;
           this.Pregunta();
@@ -71,90 +68,7 @@ export class MapaPage implements OnInit {
     );
   }
 
-  async Pregunta(){
-    const alert=  await this.alertCtrl.create({
-      header:'Agregar Ruta',
-      message: '¿Desea agregar la ruta <strong>'+this.direccion_google+'</strong>?',
-      buttons:[
-        {
-          text:'Cancelar',
-          handler:()=>{
-            console.log("cancelo");
-          }
-        },
-        {
-          text:'Aceptar',
-          handler:()=>{
-            console.log("aceptar");   
-            this.agregarPunto();         
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
 
-  agregarPunto(){
-    const wp={
-      location:{
-        lat: this.latitud,
-        lng: this.longitud
-      },stopover:true
-    };
-    this.puntos++;
-    const wd={
-      numero:this.puntos,
-      ubicacion: this.direccion_google,
-      lat:this.latitud,
-      lng:this.longitud
-    }
-    this.wayListaDeDirecciones.push(wd);
-    this.wayPoints.push(wp);
-    this.calcularRuta();
-  }
-
-  async Eliminar(punto:any){
-    const alert = await this.alertCtrl.create({
-      header: 'Eliminar Punto',
-      message: '¿Desea eliminar la direccion '+punto.ubicacion+'?',
-      buttons:[
-        {
-          text:"Cancelar",
-          handler:()=>{
-
-          }
-        },
-        {
-          text:"Aceptar",
-          handler:()=>{
-            this.quitarPunto(punto);
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  quitarPunto(punto:any){
-    const wpTemp: WayPoint[]=[];
-    this.wayPoints.forEach(item => {
-      if (item.location.lat==punto.lat && item.location.lng==punto.lng) {
-        
-      }else{
-        wpTemp.push(item);
-      }
-    });
-    this.wayPoints=wpTemp;
-
-    const wdTemp: WayDirecciones[]=[];
-    this.wayListaDeDirecciones.forEach(item => {
-      if (item.numero!=punto.numero) {
-        wdTemp.push(punto);
-      }
-    });
-    this.wayListaDeDirecciones=wdTemp;
-    this.calcularRuta();
-  }
   async cargarMapa(){
     const carga = await this.loadingCtrl.create({
       message:'Cargando Mapa...'
@@ -185,6 +99,86 @@ export class MapaPage implements OnInit {
       this.calcularRuta();
     });
   }
+  //preguntar si agrega el punto
+  async Pregunta(){
+    const alert = await this.alertCtrl.create({
+      header:'Agregar Punto',
+      message: '¿Desea agregar <strong>'+this.direccion_google+'</strong> ?',
+      buttons:[
+        {
+          text:"Cancelar",
+          handler:()=>{
+            console.log("cancelo")
+          }
+        },
+        {
+          text:"Aceptar",
+          handler:()=>{
+            console.log("agregar punto");
+            this.agregarPunto();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  // metodo para agregar un punto a la ruta
+  agregarPunto(){
+    const wp={
+      location:{
+        lat:this.latitud,
+        lng: this.longitud
+      },stopover:true
+    }
+    const parada={
+      ubicacion: this.direccion_google,
+      lat: this.latitud,
+      lng: this.longitud
+    };
+    this.listaParadas.push(parada);
+    this.wayPoints.push(wp);
+    this.calcularRuta();
+  }
+
+  async Eliminar(parada: Paradas){
+    const alert= await this.alertCtrl.create({
+      header:'Eliminar Parada',
+      message:'¿Desea Eliminar parada <strong>'+parada.ubicacion+'</strong>?',
+      buttons:[
+        {
+          text:"cancelar",
+          handler:()=>{
+
+          }
+        },
+        {
+          text:"Aceptar",
+          handler:()=>{
+            this.quitarPunto(parada);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  // metodo quitar punto
+  quitarPunto(p:Paradas){
+    const wpT: WayPoint[]=[];
+    this.wayPoints.forEach(item => {
+      if (!(p.lat==item.location.lat && p.lng==item.location.lng)) {
+        wpT.push(item);
+      }
+    });
+    this.wayPoints=wpT;
+    const pTemp: Paradas[]=[];
+    this.listaParadas.forEach(item => {
+      if (item.ubicacion!=p.ubicacion) {
+        pTemp.push(item);
+      }
+    });
+    this.listaParadas=pTemp;
+    this.calcularRuta();
+  }
   // metodo que permite agregar un marcador
   public AgregarMarcador(lat: number, lng: number, titulo: string){
     const marcador = new google.maps.Marker({
@@ -199,7 +193,7 @@ export class MapaPage implements OnInit {
   //// agragar varios marcadore
   public dibujarMarcador(){
     this.listaMarcadores.forEach(m=>{
-      this.AgregarMarcador(m.position.lat,m.position.lng,m.tittle);
+      this.AgregarMarcador(m.position.lat,m.position.lng,m.title);
     });
   }
   // crear metodo que permita calcular la ruta entre 2 puntos
@@ -228,18 +222,18 @@ export class MapaPage implements OnInit {
       lat:-33.5763103,
       lng: -70.56029649999999
     },
-    tittle:'Mi casa'
+    title:'Casa'
   },
   {
     position:{
       lat:-33.60955,
       lng:  -70.57590999999999
     },
-    tittle:'plaza puente'
+    title:'Duc Puente Alto'
   }
   ]
-  wayPoints: WayPoint[]=[];
-  wayListaDeDirecciones: WayDirecciones[]=[];
+  wayPoints: WayPoint[]=[]
+  listaParadas: Paradas[]=[]
 
 }
 
@@ -251,9 +245,8 @@ interface WayPoint{
   },
   stopover:boolean
 }
-// crear un objeto donde se almacene la direccion y su numero de punto
-interface WayDirecciones{
-  numero:number,
+// crear objeto para visualizar las rutas
+interface Paradas{
   ubicacion:string,
   lat:number,
   lng:number

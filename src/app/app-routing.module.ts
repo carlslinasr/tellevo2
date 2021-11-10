@@ -87,10 +87,6 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
-  {
-    path: 'direcciones',
-    loadChildren: () => import('./direcciones/direcciones.module').then( m => m.DireccionesPageModule)
-  },
 
 ];
 

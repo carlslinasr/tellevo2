@@ -1,17 +1,18 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>mapa</ion-title>
+    <ion-title>
+      Blank
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-input type="text" placeholder="ingrese direccion" [(ngModel)]="dire"></ion-input>
   <ion-button (click)="Direccion()">Buscar</ion-button>
-  
-<div id="map"></div>
-<div id="lista">
-  <ion-list *ngFor="let d of wayListaDeDirecciones">
-    <ion-label (click)="Eliminar(d)">{{d.ubicacion}}</ion-label>
-  </ion-list>
-</div>
+  <div id="map"></div>
+  <div id="lista">
+    <ion-list *ngFor="let p of listaParadas">
+      <ion-label (click)="Eliminar(p)">{{p.ubicacion}}</ion-label>
+    </ion-list>
+  </div>
 </ion-content>

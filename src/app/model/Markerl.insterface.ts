@@ -3,5 +3,5 @@ export interface MarkerI{
         lat: number,
         lng: number
     },
-    tittle:string
+    title:string
 }
